@@ -151,8 +151,13 @@ The executable will be in `dist/MacShortcuts.exe`
 
 ## 🗑️ Uninstalling
 
+**If you used the installer:**
+1. Go to Windows Settings → Apps → Installed apps
+2. Find "MacKeys" and click Uninstall
+
+**If you're running the standalone .exe:**
 1. Right-click the tray icon → **Quit**
-2. Remove from Task Scheduler (if you set up auto-start)
+2. Remove from Task Scheduler (if you set up auto-start manually)
 3. Delete `MacShortcuts.exe`
 
 ---
