@@ -1,0 +1,90 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers on version tags like v1.0.0
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Build executable with PyInstaller
+      run: |
+        python build.py
+
+    - name: Install Inno Setup
+      run: |
+        choco install innosetup -y
+
+    - name: Build installer with Inno Setup
+      run: |
+        & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+      shell: pwsh
+
+    - name: Get version from tag
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          installer_output/MacKeys-Setup-v*.exe
+        body: |
+          ## MacKeys ${{ steps.get_version.outputs.VERSION }}
+
+          ### Installation
+
+          1. Download `MacKeys-Setup.exe` below
+          2. Run the installer (double-click)
+          3. Follow the installation wizard
+          4. Look for the system tray icon
+          5. Start using Mac-style shortcuts on Windows!
+
+          ### What's New
+
+          - Initial release with Mac-style keyboard shortcuts
+          - System tray icon with enable/disable toggle
+          - Auto-start on Windows boot (optional)
+
+          ### Features
+
+          - **Alt + Backspace**: Delete entire line
+          - **Win + Backspace**: Delete word
+          - **Alt + `**: Switch between app instances
+          - **Alt + C/V/X/Z/S**: Mac-style shortcuts (Copy/Paste/Cut/Undo/Save)
+          - And many more!
+
+          ### System Requirements
+
+          - Windows 10 or later
+          - Administrator privileges (for keyboard hooking)
+
+          ---
+
+          **Full changelog**: https://github.com/${{ github.repository }}/commits/${{ steps.get_version.outputs.VERSION }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: MacKeys-Installer
+        path: installer_output/MacKeys-Setup-v*.exe
