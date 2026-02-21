@@ -113,6 +113,43 @@ The `MacShortcuts.exe` file is completely standalone and can be distributed as-i
 
 4. Check "Run as administrator" (Note: This may prompt for password on startup)
 
+## Creating an Installer (Recommended for Distribution)
+
+Instead of distributing a raw `.exe`, create a professional installer that users can just double-click:
+
+### Using Inno Setup (Easiest)
+
+1. **Download Inno Setup** (free): https://jrsoftware.org/isdl.php
+
+2. **Build the .exe first:**
+   ```bash
+   python build.py
+   ```
+
+3. **Open Inno Setup Compiler**
+
+4. **Open the installer script:**
+   - File → Open → Select `installer.iss`
+
+5. **Compile the installer:**
+   - Build → Compile (or press Ctrl+F9)
+
+6. **Find your installer:**
+   - Location: `installer_output/MacKeys-Setup-v1.0.0.exe`
+   - This is the file you distribute!
+
+### What the installer does:
+
+- ✅ Professional installation wizard
+- ✅ Installs to Program Files
+- ✅ Creates Start Menu shortcuts
+- ✅ Optional desktop shortcut
+- ✅ Optional auto-start on Windows boot
+- ✅ Creates uninstaller
+- ✅ Single `.exe` file (no zip required)
+
+Users just download `MacKeys-Setup.exe` and double-click it. Much cleaner than GitHub Releases!
+
 ## Building for Release
 
 ### Automated Build with GitHub Actions (Recommended)

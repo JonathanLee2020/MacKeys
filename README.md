@@ -6,14 +6,17 @@ A lightweight system tray app that brings Mac keyboard shortcuts to Windows. No 
 
 ## 🎯 Quick Start for Users
 
-### Download & Run (Easiest Method)
+### Download & Install (Easiest Method)
 
-1. **Download** `MacShortcuts.exe` from [Releases](../../releases)
-2. **Run as administrator** (right-click → "Run as administrator")
-3. **Look for the tray icon** in the bottom-right of your screen
-4. **Start using Mac shortcuts!**
+1. **Download** `MacKeys-Setup.exe` from [Releases](../../releases)
+2. **Run the installer** (double-click the downloaded file)
+3. **Follow the installation wizard**
+4. **Look for the tray icon** in the bottom-right of your screen
+5. **Start using Mac shortcuts!**
 
-That's it! No Python installation, no dependencies, no configuration needed.
+That's it! No Python, no dependencies, no manual configuration needed.
+
+> **Note:** The installer will optionally set up auto-start and create shortcuts for you.
 
 ### System Tray Controls
 
