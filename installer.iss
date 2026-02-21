@@ -37,7 +37,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "startupicon"; Description: "Run at Windows startup (recommended)"; GroupDescription: "Auto-start:"; Flags: checked
+Name: "startupicon"; Description: "Run at Windows startup (recommended)"; GroupDescription: "Auto-start:"
 
 [Files]
 Source: "dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
